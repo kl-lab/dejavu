@@ -23,7 +23,7 @@ require("Dejavu")
 
 ### Forecasting with Similarity
 
-* **Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition ** (Download the repository to local first)
+* **Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition** (Download the repository to local first)
 
   ```R
   fc_Simi <- Similarity(AirPassengers, fh = 20, LoadData = TRUE, path = NULL)
