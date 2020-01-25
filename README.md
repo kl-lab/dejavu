@@ -23,7 +23,7 @@ require("Dejavu")
 
 ### Forecasting with Similarity
 
-* Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition (Download the repository to local first)
+* **Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition** (Download the repository to local first)
 
   ```R
   fc_Simi <- Similarity(AirPassengers, fh = 20, LoadData = TRUE, path = NULL)
@@ -33,11 +33,11 @@ require("Dejavu")
   autoplot(AirPassengers)+autolayer(fcs_result)+autolayer(PIL_result)+autolayer(PIU_result)
   ```
 
-  ![Alt text](F:/Github/Dejavu/Forecast_result.png "Forecasting AirPassengers")
+<div align="center">
+  <img src="https://github.com/kdwang1808/Dejavu/blob/master/Forecast_result.png"><br><br>
+</div>
 
-  
-
-* Using "Mydata" as Reference
+* **Using "Mydata" as Reference**
 
   ```R
   fc_Simi <- Similarity(AirPassengers, fh = 20, LoadData = FALSE, path = "Mydata")
