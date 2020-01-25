@@ -26,6 +26,9 @@ require("Dejavu")
 * **Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition** (Download the repository to local first)
 
   ```R
+  library(dtw)
+  library(robustbase)
+  library(forecast)
   fc_Simi <- Similarity(AirPassengers, fh = 20, LoadData = TRUE, path = NULL)
   fcs_result <- ts(fc_Simi$fcs, start = 1961, frequency = 12)
   PIL_result <- ts(fc_Simi$PIL, start = 1961, frequency = 12)
