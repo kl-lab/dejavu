@@ -23,7 +23,7 @@ require("dejavu")
 
 ### Forecasting with Similarity
 
-* **Using [Reference](https://github.com/kdwang1808/Reference) data from M3 Competition** (Download the repository to local first)
+* **Using [Reference](https://github.com/kl-lab/dejavu-refdata) data from M3 Competition** (Download the repository to local first)
 
   ```R
   library(dtw)
