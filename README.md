@@ -1,15 +1,15 @@
-`Dejavu`
+`dejavu`
 ========
 
-The R package ``Dejavu`` provides  efficient algorithms for forecasting with Similarity of a bunch of time series.
+The R package ``dejavu`` provides  efficient algorithms for forecasting with Similarity of a bunch of time series.
 
 Installation
 ------------
 
-You can install  `Dejavu` package from [GitHub Repository](https://github.com/kdwang1808/Dejavu) with:
+You can install  `dejavu` package from [GitHub Repository](https://github.com/kdwang1808/Dejavu) with:
 
 ``` r
-devtools::install_github("kdwang1808/Dejavu")
+devtools::install_github("kl-lab/dejavu")
 ```
 
 Usage
@@ -18,7 +18,7 @@ Usage
 ### Load the package
 
 ``` r
-require("Dejavu")
+require("dejavu")
 ```
 
 ### Forecasting with Similarity
@@ -37,7 +37,7 @@ require("Dejavu")
   ```
 
 <div align="center">
-  <img src="https://github.com/kdwang1808/Dejavu/blob/master/Forecast_result.png"><br><br>
+  <img src="https://github.com/kl-lab/dejavu/blob/master/Forecast_result.png"><br><br>
 </div>
 
 * **Using "Mydata" as Reference**
@@ -53,7 +53,7 @@ References
 ----------
 
 - Yanfei Kang, Evangelos Spiliotis, Fotios Petropoulos, Nikolaos Athiniotis, Feng Li, Vassilios
-  Assimakopoulos (2019). **D´ej\`a vu: forecasting with similarity.** 
+  Assimakopoulos (2019). **Déjà vu: forecasting with similarity.** 
 
   [Working paper on arXiv](https://arxiv.org/abs/1909.00221).
 
