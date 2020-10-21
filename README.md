@@ -53,9 +53,7 @@ References
 ----------
 
 - Yanfei Kang, Evangelos Spiliotis, Fotios Petropoulos, Nikolaos Athiniotis, Feng Li, Vassilios
-  Assimakopoulos (2019). **Déjà vu: forecasting with similarity.** 
-
-  [Working paper on arXiv](https://arxiv.org/abs/1909.00221).
+  Assimakopoulos (2020). **Déjà vu: A data-centric forecasting approach through time series cross-similarity** Journal of Business Research. [Working paper on arXiv](https://arxiv.org/abs/1909.00221).
 
 
 License
