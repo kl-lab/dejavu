@@ -108,11 +108,11 @@ AD_dist <- function(reference, testing){
 Forecasting <- function(data_input, fh, nts, Preprocessing, Dist_type, path, clustering=0, LoadData=TRUE, FullOutput=FALSE){
   
   if (LoadData){
-    load(paste0("reference/ref",frequency(data_input),".RData"))
-    load(paste0("reference/ref",frequency(data_input),"_",Preprocessing,".RData"))
+    load(paste0("dejavu-refdata/ref",frequency(data_input),".RData"))
+    load(paste0("dejavu-refdata/ref",frequency(data_input),"_",Preprocessing,".RData"))
   } else {
-    load(paste0("reference/", path,".RData"))
-    load(paste0("reference/", path,"_",Preprocessing,".RData"))
+    load(paste0("dejavu-refdata/", path,".RData"))
+    load(paste0("dejavu-refdata/", path,"_",Preprocessing,".RData"))
   }
   
   if (frequency(data_input)==1){
