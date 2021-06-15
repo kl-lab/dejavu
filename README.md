@@ -54,7 +54,7 @@ require("dejavu")
 
 #### Using user-defined reference data
 
-    Assume you have created a user-defined reference in the folder `my-dejavu-refdata`
+Assume you have created a user-defined reference in the folder `my-dejavu-refdata`
 
   ```R
   fc_Simi <- Similarity(AirPassengers, fh = 20, LoadData = FALSE, path = "my-dejavu-refdata")
