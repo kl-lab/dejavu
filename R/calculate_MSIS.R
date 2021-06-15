@@ -8,7 +8,7 @@
 #'
 #' @return Dataframe containing theaccuracy of MSIS, Coverage, Upper coverage, Spread and MASE
 #' using ETS, SHD, Similarity and ETS-Similarity separately
-#' @author 
+#' @author
 #' @references Svetunkov & Petropoulos (2018)
 #' @export
 #'
@@ -58,8 +58,8 @@ calculate_MSIS <- function(tsi, gamma = 0.05, fh, nts = 100, Dist_type = 3){
   }else{
     des_input <- y ; SIout <- rep(1, fh)
   }
-  
-  
+
+
   f1 <- ses(des_input, h=fh) #Ses
   f2 <- holt(des_input, h=fh, damped=F) #Holt
   f3 <- holt(des_input, h=fh, damped=T) #Damped
@@ -83,11 +83,11 @@ calculate_MSIS <- function(tsi, gamma = 0.05, fh, nts = 100, Dist_type = 3){
   spread_comb = calculate_PI_spread(PIL_comb, PIU_comb, y, scaling = 'sdiff')
   spread_rel_comb = calculate_PI_spread(PIL_comb, PIU_comb, y, scaling = 'snaive')
 
-  accuracy_comp <- data.frame(MSIS_ets, MSIS_SHD, MSIS_Similarity, MSIS_comb, 
+  accuracy_comp <- data.frame(MSIS_ets, MSIS_SHD, MSIS_Similarity, MSIS_comb,
                               MSIS_rel_ets, MSIS_rel_SHD, MSIS_rel_Similarity, MSIS_rel_comb,
-                              coverage_ets, coverage_SHD, coverage_Similarity, coverage_comb, 
-                              ucoverage_ets, ucoverage_SHD,ucoverage_Similarity, ucoverage_comb, 
-                              spread_ets, spread_SHD, spread_Similarity, spread_comb, 
+                              coverage_ets, coverage_SHD, coverage_Similarity, coverage_comb,
+                              ucoverage_ets, ucoverage_SHD,ucoverage_Similarity, ucoverage_comb,
+                              spread_ets, spread_SHD, spread_Similarity, spread_comb,
                               spread_rel_ets, spread_rel_SHD, spread_rel_Similarity, spread_rel_comb,
                               MASE_Similarity, MASE_ets, MASE_SHD,
                               opt.delta)
@@ -104,18 +104,19 @@ calculate_PI_ucoverage <- function(PIL, PIU, yout){
 }
 
 calculate_PI_spread <- function(PIL, PIU, y, scaling = c('sdiff', 'snaive')){
-  if (scaling == 'sdiff'){
-    denom = mean(abs(diff(as.vector(y), lag=frequency(y))))
-  }else{
-    PIL_naive = PIU_naive = rep(NA, length(y) - frequency(y) - 1)
-    for (i in 1:(length(y) - frequency(y) - 1)){
-      y.naive = snaive(head(y, i + frequency(y)), h=1, level=95)
-      PIL_naive[i] = y.naive$lower
-      PIU_naive[i] = y.naive$upper
+    if (scaling[1] == 'sdiff')
+    {
+        denom = mean(abs(diff(as.vector(y), lag=frequency(y))))
+    }else{
+        PIL_naive = PIU_naive = rep(NA, length(y) - frequency(y) - 1)
+        for (i in 1:(length(y) - frequency(y) - 1)){
+            y.naive = snaive(head(y, i + frequency(y)), h=1, level=95)
+            PIL_naive[i] = y.naive$lower
+            PIU_naive[i] = y.naive$upper
+        }
+        denom = mean(PIU_naive - PIL_naive)
     }
-    denom = mean(PIU_naive - PIL_naive)
-  }
-  return(mean(PIU - PIL)/denom) 
+    return(mean(PIU - PIL)/denom)
 }
 
 #' Calculate the mean scaled interval score(MSIS) to evaluate the performance of generated predictive intervals
@@ -133,22 +134,23 @@ calculate_PI_spread <- function(PIL, PIU, y, scaling = c('sdiff', 'snaive')){
 #'
 #' @examples
 calculate_PI_MSIS <- function(PIL, PIU, y, yout, gamma = 0.05, scaling = c('sdiff', 'snaive')){
-  if (scaling == 'sdiff'){
-    denom = mean(abs(diff(as.vector(y), lag=frequency(y))))
-  }else{
-    PIL_naive = PIU_naive = rep(NA, length(y) - frequency(y) - 1)
-    for (i in 1:(length(y) - frequency(y) - 1)){
-      y.naive = snaive(head(y, i + frequency(y)), h=1, level=100*(1-gamma))
-      PIL_naive[i] = y.naive$lower
-      PIU_naive[i] = y.naive$upper
+    if (scaling[1] == 'sdiff')
+    {
+        denom = mean(abs(diff(as.vector(y), lag=frequency(y))))
+    }else{
+        PIL_naive = PIU_naive = rep(NA, length(y) - frequency(y) - 1)
+        for (i in 1:(length(y) - frequency(y) - 1)){
+            y.naive = snaive(head(y, i + frequency(y)), h=1, level=100*(1-gamma))
+            PIL_naive[i] = y.naive$lower
+            PIU_naive[i] = y.naive$upper
+        }
+        yout.naive = tail(y, length(y) - frequency(y) - 1)
+        denom = mean((PIU_naive - PIL_naive +
+                      (2 / gamma) * (PIL_naive - yout.naive) * (PIL_naive > yout.naive) +
+                      (2 / gamma) * (yout.naive - PIU_naive) * (PIU_naive < yout.naive)))
     }
-    yout.naive = tail(y, length(y) - frequency(y) - 1)
-    denom = mean((PIU_naive - PIL_naive +
-                    (2 / gamma) * (PIL_naive - yout.naive) * (PIL_naive > yout.naive) +
-                    (2 / gamma) * (yout.naive - PIU_naive) * (PIU_naive < yout.naive)))
-  }
-  PI_MSIS = mean((PIU - PIL +
+    PI_MSIS = mean((PIU - PIL +
                     (2 / gamma) * (PIL - yout) * (PIL > yout) +
                     (2 / gamma) * (yout - PIU) * (PIU < yout))) / denom
-  return(PI_MSIS) 
+    return(PI_MSIS)
 }
